@@ -6,42 +6,36 @@ on:
       - main
 
 jobs:
-  # 1단계: Docker Hub에 이미지 빌드 및 푸시
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
         with:
           username: kwakminjae
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and Push Docker image
-        uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: kwakminjae/mlops-image-api:latest
 
-  # 2단계: 내 컴퓨터(Runner)에서 자동 배포
   deploy:
     needs: build-and-push
     runs-on: self-hosted
     steps:
       - name: Stop and remove existing container
         run: |
-          docker stop mlops-container || true
-          docker rm mlops-container || true
+          docker stop mlops-container -ErrorAction SilentlyContinue
+          docker rm mlops-container -ErrorAction SilentlyContinue
+        shell: powershell
 
       - name: Pull latest image
         run: docker pull kwakminjae/mlops-image-api:latest
+        shell: powershell
 
       - name: Run new container
         run: docker run -d --name mlops-container -p 8000:8000 kwakminjae/mlops-image-api:latest
+        shell: powershell
