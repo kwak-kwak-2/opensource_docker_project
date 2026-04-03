@@ -37,8 +37,8 @@ jobs:
     steps:
       - name: Stop and remove existing container
         run: |
-          docker stop mlops-container || true
-          docker rm mlops-container || true
+          docker stop mlops-container -ErrorAction SilentlyContinue
+          docker rm mlops-container -ErrorAction SilentlyContinue
 
       - name: Pull latest image
         run: docker pull kwakminjae/mlops-image-api:latest
