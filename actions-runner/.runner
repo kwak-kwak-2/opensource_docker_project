@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "USER-NOTEBOOK",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus22.actions.githubusercontent.com/StwUQkw4gGfevgGXb4uorvMuOXWEJKNO0jSnqDlJ8JtTds3YG2/",
+  "gitHubUrl": "https://github.com/kwak-kwak-2/opensource_docker_project",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

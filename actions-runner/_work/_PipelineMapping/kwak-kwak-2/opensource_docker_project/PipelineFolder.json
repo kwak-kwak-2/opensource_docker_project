@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "kwak-kwak-2/opensource_docker_project",
+  "pipelineDirectory": "opensource_docker_project",
+  "workspaceDirectory": "opensource_docker_project\\opensource_docker_project",
+  "repositories": {
+    "kwak-kwak-2/opensource_docker_project": {
+      "repositoryPath": "opensource_docker_project\\opensource_docker_project",
+      "lastRunOn": "04/04/2026 04:45:41 +09:00"
+    }
+  },
+  "lastRunOn": "04/04/2026 04:45:41 +09:00"
+}
