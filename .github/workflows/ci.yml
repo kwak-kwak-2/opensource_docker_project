@@ -26,16 +26,10 @@ jobs:
     needs: build-and-push
     runs-on: self-hosted
     steps:
-      - name: Stop and remove existing container
+      - name: Deploy Container
         run: |
-          docker stop mlops-container -ErrorAction SilentlyContinue
-          docker rm mlops-container -ErrorAction SilentlyContinue
+          if (docker ps -a -q --filter "name=mlops-container") { docker stop mlops-container; docker rm mlops-container }
+          docker pull kwakminjae/mlops-image-api:latest
+          docker run -d --name mlops-container -p 8000:8000 kwakminjae/mlops-image-api:latest
         shell: powershell
-
-      - name: Pull latest image
-        run: docker pull kwakminjae/mlops-image-api:latest
-        shell: powershell
-
-      - name: Run new container
-        run: docker run -d --name mlops-container -p 8000:8000 kwakminjae/mlops-image-api:latest
-        shell: powershell
+        
